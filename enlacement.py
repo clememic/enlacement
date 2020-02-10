@@ -385,7 +385,7 @@ def enlacement_heatmaps(a, b, thetas=None, normalized=True, n_jobs=-1):
         heatmaps = np.array(heatmaps)
 
     if normalized:
-        heatmaps /= (a_area * b_area)
+        heatmaps /= b_area
 
     return heatmaps
 
@@ -414,6 +414,7 @@ def _enlacement_heatmaps_direction(a, b, theta):
             a1, a2 = cut[2], cut[3] + 1
             heatmap[line[0][a1:a2], line[1][a1:a2]] += e
 
+    # Isotropy normalization
     if _quadrant(theta):
         heatmap /= abs(math.cos(theta)) ** 2
     else:
